@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BasuraBuddy – Smart Waste Sorter</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #e8f5e9; margin: 0; padding: 20px; }
+    .app { max-width: 400px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #2e7d32; }
+    input[type="file"] { margin-top: 10px; }
+    #preview { margin-top: 10px; max-width: 100%; border-radius: 8px; }
+    button { margin-top: 15px; padding: 10px 15px; background: #43a047; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+    .result { margin-top: 20px; padding: 10px; background: #c8e6c9; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h2>♻️ BasuraBuddy</h2>
+    <p>Take or upload a photo of your trash item:</p>
+    <input type="file" accept="image/*" onchange="previewImage(event)">
+    <img id="preview" src="" alt="Image Preview" />
+
+    <button onclick="predictWaste()">Classify Waste</button>
+
+    <div class="result" id="resultBox">Prediction will appear here.</div>
+  </div>
+
+  <script>
+    let imageData;
+
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        imageData = reader.result;
+        document.getElementById("preview").src = imageData;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function predictWaste() {
+      // Simulated prediction logic for demo purposes
+      const categories = ["Biodegradable", "Recyclable", "Non-biodegradable", "Hazardous"];
+      const randomPick = categories[Math.floor(Math.random() * categories.length)];
+      const resultText = `🧠 Predicted Category: <strong>${randomPick}</strong>`;
+      document.getElementById("resultBox").innerHTML = resultText;
+    }
+  </script>
+</body>
+</html>
